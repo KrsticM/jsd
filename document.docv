@@ -8,5 +8,14 @@ table
     datasource studenti
     num-row=4
     title="Tabela 1"
-    select = ("Indeks", "Ime", "Prezime", "Bodovi", "Ocena",)
+    select = ({{Indeks}}, {{Ime}}, {{Prezime}}, {{Bodovi}}, {{Ocena}},)
+]
+piechart
+[
+    title="Pie chart 1"
+    series-select
+    [
+        label="Ocena"
+        value=Count({{Ocena}})
+    ]
 ]

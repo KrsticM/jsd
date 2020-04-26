@@ -3,7 +3,7 @@ Document:
 ;
 
 DocumentStatement:
-	data=Data | image=Image | table=Table | text=TextType
+	data=Data | image=Image | table=Table | text=TextType | chart=ChartType
 ;
 
 Data:
@@ -39,7 +39,7 @@ Title:
 ;
 
 Column:
-	name=STRING ','
+	name=DataValue ','
 ;
 
 TextType:
@@ -56,6 +56,58 @@ Header:
 
 HeaderSize:
 	'H1' | 'H2' | 'H3'
+;
+
+ChartType:
+	PieChart | LineChart | BarChart
+;
+
+PieChart:
+	'piechart' '[' chart_attr+=ChartAttr ']'
+;
+
+LineChart:
+	'linechart' '[' chart_attr+=ChartAttr ']'
+;
+
+BarChart:
+	'barchart' '[' chart_attr+=ChartAttr ']'
+;
+
+ChartAttr: 
+	DataSource | SeriesSelect | Title
+;
+
+SeriesSelect:
+	'series-select' '[' series_attr+=SeriesAttr ']'
+;
+
+SeriesAttr:
+	Label | Value
+;
+
+Label:
+	'label' '=' label=STRING 
+;
+
+Value:
+	'value' '=' DataField
+;
+
+DataField:
+	AggregateField | DataValue | value=STRING
+;
+
+AggregateField:
+	type=AggregateType '(' data_value=DataValue ')'
+;
+
+AggregateType:
+	'Count' | 'Sum'
+;
+
+DataValue:
+	'{{' value=/[A-Za-z0-9]+/ '}}'
 ;
 
 Comment:
