@@ -1,0 +1,2 @@
+data studenti = "SELECT * FROM studenti"
+data profesori = "SELECT * FROM profesori JOIN predmeti ON profesori.predmet_id = predmeti.id"
