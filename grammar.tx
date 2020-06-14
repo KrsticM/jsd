@@ -1,0 +1,115 @@
+Document:
+	document_statement*=DocumentStatement
+;
+
+DocumentStatement:
+	data=Data | image=Image | table=Table | text=TextType | chart=ChartType
+;
+
+Data:
+    'data' name=ID '=' data_value=STRING
+;
+
+Image: 
+	'image' '=' image_source=STRING
+;
+
+Table:
+	'table' '[' table_attr+=TabbleAttr ']'
+;
+
+TabbleAttr: 
+	DataSource |  NumRow | Select | Title
+;
+
+DataSource:
+	'datasource' name=ID
+;
+
+NumRow:
+	'num-row' '=' num_row=INT
+;
+
+Select:
+	'select' '=' '(' columns+=Column ')'
+;
+
+Title:
+	'title' '=' title=STRING
+;
+
+Column:
+	name=DataValue ','
+;
+
+TextType:
+	Text | Header
+;
+
+Text:
+	'text' '=' text=STRING 
+;
+
+Header:
+	'header' header_size=HeaderSize '=' text=STRING
+;
+
+HeaderSize:
+	'H1' | 'H2' | 'H3'
+;
+
+ChartType:
+	PieChart | LineChart | BarChart
+;
+
+PieChart:
+	'piechart' '[' chart_attr+=ChartAttr ']'
+;
+
+LineChart:
+	'linechart' '[' chart_attr+=ChartAttr ']'
+;
+
+BarChart:
+	'barchart' '[' chart_attr+=ChartAttr ']'
+;
+
+ChartAttr: 
+	DataSource | SeriesSelect | Title
+;
+
+SeriesSelect:
+	'series-select' '[' series_attr+=SeriesAttr ']'
+;
+
+SeriesAttr:
+	Label | Value
+;
+
+Label:
+	'label' '=' label=STRING 
+;
+
+Value:
+	'value' '=' DataField
+;
+
+DataField:
+	AggregateField | DataValue | value=STRING
+;
+
+AggregateField:
+	type=AggregateType '(' data_value=DataValue ')'
+;
+
+AggregateType:
+	'Count' | 'Sum'
+;
+
+DataValue:
+	'{{' value=/[A-Za-z0-9]+/ '}}'
+;
+
+Comment:
+	/\/\*(.|\n)*?\*\// | /\/\/.*?$/
+;
