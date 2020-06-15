@@ -1,0 +1,7 @@
+{% if data.header_size == 'H1' %}
+<h1> {{ data.text }} </h1>
+{% elif data.header_size == 'H2' %}
+<h2> {{ data.text }} </h2>
+{% else %}
+<h3> {{ data.text }} </h3>
+{% endif %}

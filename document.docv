@@ -1,6 +1,6 @@
 data studenti = "SELECT * FROM studenti"
 header H1 = "Ocene"
-image = "Linija.jpg"
+image = "images/Linija.png"
 header H2 = "Jezici specificni za domen"
 text = "Zimski semestar 2019/2020"
 table 
