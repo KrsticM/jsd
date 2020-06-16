@@ -8,7 +8,7 @@ table
     datasource studenti
     num-row=4
     title="Tabela 1"
-    select = ({{Indeks}}, {{Ime}}, {{Prezime}}, {{Bodovi}}, {{Ocena}},)
+    select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
 ]
 piechart
 [
