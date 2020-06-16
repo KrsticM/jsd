@@ -3,6 +3,7 @@ from os.path import join, dirname
 import psycopg2
 import jinja2
 import datetime
+import pdfkit
 
 metamodel = metamodel_from_file('grammar.tx')
 model = metamodel.model_from_file('document.docv')
@@ -38,7 +39,7 @@ def parse_text(data):
 
 def parse_image(data):
     template = jinja_env.get_template('image.j2')
-    output_folder.write(template.render(image_source=join('../', data.image_source), datetime=now))
+    output_folder.write(template.render(image_source=join(data.image_source), datetime=now))
 
 def parse_table(data):
     # Za sada ovako, mozda enkapsulirati promenljive u klasu Tabela?
@@ -88,6 +89,11 @@ def parse_table(data):
     template = jinja_env.get_template('table.j2')
     output_folder.write(template.render(col_names_num=len(col_names), numRow=numRow, title=title, col_names=col_names, arranged_table=arranged_table))
 
+def generate_pdf():
+    utils_folder = join(dirname(__file__), 'utils')
+    config = pdfkit.configuration(wkhtmltopdf=join(utils_folder, 'wkhtmltopdf.exe'))
+    pdfkit.from_file('generated/output.html', 'generated/output.pdf')
+
 # main fuction
 if __name__ == "__main__":
     output_folder = open('generated/output.html', 'w')
@@ -112,5 +118,8 @@ if __name__ == "__main__":
 
     con.close()
     output_folder.close()
+
+    generate_pdf()
+
     print(all_data)
     print(all_data_colnames)
