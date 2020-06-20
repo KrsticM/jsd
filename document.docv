@@ -10,12 +10,13 @@ table
     title="Tabela 1"
     select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
 ]
-piechart
+barchart
 [
     title="Pie chart 1"
+    datasource studenti
     series-select
     [
-        label="Ocena"
-        value=Count({{Ocena}})
+        label={{Ocena}}
+        value=Sum({{Bodovi}})
     ]
 ]
