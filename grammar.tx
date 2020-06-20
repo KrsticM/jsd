@@ -87,15 +87,19 @@ SeriesAttr:
 ;
 
 Label:
-	'label' '=' label=STRING 
+	'label' '=' label_value=LabelValue 
+;
+
+LabelValue: 
+	StringValues | DataValue
 ;
 
 Value:
-	'value' '=' DataField
+	'value' '=' datafield=DataField
 ;
 
 DataField:
-	AggregateField | DataValue | value=STRING
+	AggregateField | DataValue | StringValues
 ;
 
 AggregateField:
@@ -108,6 +112,14 @@ AggregateType:
 
 DataValue:
 	'{{' value=/[A-Za-z0-9]+/ '}}'
+;
+
+StringValues:
+	'(' string_values+=StringValue ')'
+;
+
+StringValue: 
+	value=STRING
 ;
 
 Comment:

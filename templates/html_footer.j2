@@ -1,3 +1,45 @@
 
+<script type="text/javascript">
+'use strict';
+(function(setLineDash) {
+    CanvasRenderingContext2D.prototype.setLineDash = function() {
+        if(!arguments[0].length){
+            arguments[0] = [1,0];
+        }
+        // Now, call the original method
+        return setLineDash.apply(this, arguments);
+    };
+})(CanvasRenderingContext2D.prototype.setLineDash);
+Function.prototype.bind = Function.prototype.bind || function (thisp) {
+    var fn = this;
+    return function () {
+        return fn.apply(thisp, arguments);
+    };
+};
+
+function drawGraphs() {
+    {% for chart in charts %}
+    new Chart(
+        document.getElementById("{{chart.name}}"), {
+            "responsive": false,
+            "type":"{{chart.chart_type}}",
+            "data":{"labels":{{chart.label_values}},"datasets":[{"data":{{chart.data_values}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},
+            "options": {
+                title: {
+                    display: true,
+                    text: "{{chart.title}}"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    );
+    {% endfor %}
+}
+window.onload = function() {
+    drawGraphs();
+};
+</script>
 </body>
 </html>

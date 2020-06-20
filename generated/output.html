@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <style>
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+.reportGraph {width:900px}
 </style>
 </head>
 <body><h1> Ocene </h1>
@@ -27,18 +30,65 @@ table, th, td {
     </tr>  
     <tr>
         <td>ra-1-2015</td>
-        <td>Mikic</td>
+        <td>Mikić</td>
         <td>Mika</td>
         <td>55</td>
         <td>6</td>
     </tr>
     <tr>
+        <td>ra-3-2015</td>
+        <td>Jovanović</td>
+        <td>Jovan</td>
+        <td>75</td>
+        <td>8</td>
+    </tr>
+    <tr>
         <td>ra-2-2015</td>
-        <td>Peric</td>
+        <td>Perić</td>
         <td>Pera</td>
         <td>65</td>
-        <td>7</td>
+        <td>8</td>
     </tr>
-</table>
+</table><div class="reportGraph"><canvas id="chart0"></canvas></div>
+<script type="text/javascript">
+'use strict';
+(function(setLineDash) {
+    CanvasRenderingContext2D.prototype.setLineDash = function() {
+        if(!arguments[0].length){
+            arguments[0] = [1,0];
+        }
+        // Now, call the original method
+        return setLineDash.apply(this, arguments);
+    };
+})(CanvasRenderingContext2D.prototype.setLineDash);
+Function.prototype.bind = Function.prototype.bind || function (thisp) {
+    var fn = this;
+    return function () {
+        return fn.apply(thisp, arguments);
+    };
+};
+
+function drawGraphs() {
+    new Chart(
+        document.getElementById("chart0"), {
+            "responsive": false,
+            "type":"bar",
+            "data":{"labels":[6, 8],"datasets":[{"data":[55, 140],"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},
+            "options": {
+                title: {
+                    display: true,
+                    text: "Pie chart 1"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    );
+}
+window.onload = function() {
+    drawGraphs();
+};
+</script>
 </body>
 </html>
