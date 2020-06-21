@@ -3,7 +3,15 @@ Document:
 ;
 
 DocumentStatement:
-	data=Data | image=Image | table=Table | text=TextType | chart=ChartType
+	data=Data | image=Image | table=Table | text=TextType | chart=ChartType | line=HorizontalLine
+;
+
+HorizontalLine:
+	'line' (color=Color)? 
+;
+
+Color:
+	'black' | 'blue' | 'brown' | 'cyan' | 'green' | 'grey' | 'magenta' | 'orange' | 'pink' | 'purple' |'red' | 'silver' | 'white' |'yellow'
 ;
 
 Data:
@@ -51,7 +59,7 @@ Text:
 ;
 
 Header:
-	'header' header_size=HeaderSize '=' text=STRING
+	'header' header_size=HeaderSize (header_color=Color)? '=' text=STRING
 ;
 
 HeaderSize:

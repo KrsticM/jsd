@@ -21,16 +21,25 @@ function drawGraphs() {
     {% for chart in charts %}
     new Chart(
         document.getElementById("{{chart.name}}"), {
-            "responsive": false,
+        "responsive": false,
             "type":"{{chart.chart_type}}",
-            "data":{"labels":{{chart.label_values}},"datasets":[{"data":{{chart.data_values}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},
+            "data":{"labels":{{chart.label_values}},"datasets":[{"data":{{chart.data_values}},"fill":false,
+                        {% if chart.chart_type == 'line' %}
+                        "borderColor":"rgb(23,162,184)", 
+                        {% endif %}
+                        backgroundColor: palette('tol', {{chart.data_values}}.length).map(function(hex) {
+                        return '#' + hex;}),  "lineTension":0.1}]},           
             "options": {
                 title: {
                     display: true,
                     text: "{{chart.title}}"
                 },
                 legend: {
-                    display: false
+                    {% if chart.chart_type == 'pie'%}
+                    display: true,
+                    {% else %}
+                    display: false,
+                    {% endif %}              
                 }
             }
         }
@@ -40,6 +49,7 @@ function drawGraphs() {
 window.onload = function() {
     drawGraphs();
 };
+
 </script>
 </body>
 </html>

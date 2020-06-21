@@ -3,17 +3,21 @@
 <head>
 <meta charset="utf-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="https://cdn.rawgit.com/google/palette.js/master/palette.js"></script>
+
 <style>
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 .reportGraph {width:900px}
+
 </style>
 </head>
-<body><h1> Ocene </h1>
+<body><h1 style="color:#17a2b8"> Ocene </h1>
+<hr style="background-color:#17a2b8">
 <img src="https://i.imgur.com/vHrSBSi.jpg" />
-<h2> Jezici specificni za domen </h2>
+<h2  style="color:pink"> Jezici specificni za domen </h2>
 <p> Zimski semestar 2019/2020 </p>
 <table border="1" style="width:100%">
     <tr>
@@ -30,26 +34,40 @@ table, th, td {
     </tr>  
     <tr>
         <td>ra-1-2015</td>
-        <td>Mikić</td>
+        <td>Mikic</td>
         <td>Mika</td>
         <td>55</td>
         <td>6</td>
     </tr>
     <tr>
+        <td>ra-2-2015</td>
+        <td>Peric</td>
+        <td>Pera</td>
+        <td>65</td>
+        <td>7</td>
+    </tr>
+    <tr>
         <td>ra-3-2015</td>
-        <td>Jovanović</td>
+        <td>Jovanovic</td>
         <td>Jovan</td>
         <td>75</td>
         <td>8</td>
     </tr>
     <tr>
-        <td>ra-2-2015</td>
-        <td>Perić</td>
-        <td>Pera</td>
-        <td>65</td>
+        <td>ra-4-2015</td>
+        <td>Neko</td>
+        <td>Neko</td>
+        <td>80</td>
         <td>8</td>
     </tr>
-</table><div class="reportGraph"><canvas id="chart0"></canvas></div>
+   
+</table>
+<br>
+<br><div class="reportGraph"><canvas id="chart0"></canvas></div>
+<br>
+<br><div class="reportGraph"><canvas id="chart1"></canvas></div>
+<br>
+<br>
 <script type="text/javascript">
 'use strict';
 (function(setLineDash) {
@@ -71,16 +89,39 @@ Function.prototype.bind = Function.prototype.bind || function (thisp) {
 function drawGraphs() {
     new Chart(
         document.getElementById("chart0"), {
-            "responsive": false,
-            "type":"bar",
-            "data":{"labels":[6, 8],"datasets":[{"data":[55, 140],"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},
+        "responsive": false,
+            "type":"pie",
+            "data":{"labels":[6, 7, 8],"datasets":[{"data":[1, 1, 2],"fill":false,
+                        backgroundColor: palette('tol', [1, 1, 2].length).map(function(hex) {
+                        return '#' + hex;}),  "lineTension":0.1}]},           
             "options": {
                 title: {
                     display: true,
                     text: "Pie chart 1"
                 },
                 legend: {
-                    display: false
+                    display: true,
+              
+                }
+            }
+        }
+    );
+    new Chart(
+        document.getElementById("chart1"), {
+        "responsive": false,
+            "type":"line",
+            "data":{"labels":[6, 7, 8],"datasets":[{"data":[55, 65, 155],"fill":false,
+                        "borderColor":"rgb(23,162,184)", 
+                        backgroundColor: palette('tol', [55, 65, 155].length).map(function(hex) {
+                        return '#' + hex;}),  "lineTension":0.1}]},           
+            "options": {
+                title: {
+                    display: true,
+                    text: "Pie chart 2"
+                },
+                legend: {
+                    display: false,
+              
                 }
             }
         }
@@ -89,6 +130,7 @@ function drawGraphs() {
 window.onload = function() {
     drawGraphs();
 };
+
 </script>
 </body>
 </html>

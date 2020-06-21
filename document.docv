@@ -1,7 +1,8 @@
 data studenti = "SELECT * FROM studenti"
-header H1 = "Ocene"
+header H1 blue = "Ocene"
+line blue
 image = "https://i.imgur.com/vHrSBSi.jpg"
-header H2 = "Jezici specificni za domen"
+header H2 pink = "Jezici specificni za domen"
 text = "Zimski semestar 2019/2020"
 table 
 [
@@ -10,9 +11,19 @@ table
     title="Tabela 1"
     select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
 ]
-barchart
+piechart
 [
     title="Pie chart 1"
+    datasource studenti
+    series-select
+    [
+        label={{Ocena}}
+        value=Count({{Ocena}})
+    ]
+]
+linechart
+[
+    title="Pie chart 2"
     datasource studenti
     series-select
     [

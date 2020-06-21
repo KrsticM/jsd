@@ -1,7 +1,25 @@
+{% if data.header_color == 'None'%}
 {% if data.header_size == 'H1' %}
 <h1> {{ data.text }} </h1>
 {% elif data.header_size == 'H2' %}
 <h2> {{ data.text }} </h2>
 {% else %}
 <h3> {{ data.text }} </h3>
+{% endif %}
+{% elif  data.header_color == 'blue' %}
+{% if data.header_size == 'H1' %}
+<h1 style="color:#17a2b8"> {{ data.text }} </h1>
+{% elif data.header_size == 'H2' %}
+<h2  style="color:#17a2b8"> {{ data.text }} </h2>
+{% else %}
+<h3  style="color:#17a2b8"> {{ data.text }} </h3>
+{% endif %}
+{% else %}
+{% if data.header_size == 'H1' %}
+<h1 style="color:{{data.header_color}}"> {{ data.text }} </h1>
+{% elif data.header_size == 'H2' %}
+<h2  style="color:{{data.header_color}}"> {{ data.text }} </h2>
+{% else %}
+<h3  style="color:{{data.header_color}}"> {{ data.text }} </h3>
+{% endif %}
 {% endif %}

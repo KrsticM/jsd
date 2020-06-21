@@ -2,7 +2,6 @@ from textx import metamodel_from_file
 from os.path import join, dirname
 import psycopg2
 import jinja2
-import datetime
 import pdfkit
 
 from models.chart import Chart
@@ -12,7 +11,6 @@ model = metamodel.model_from_file('document.docv')
 con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__file__), 'templates')), trim_blocks=True, lstrip_blocks=True)
-now = datetime.datetime.now().strftime("%a, %b %d, %Y %X")
 
 all_data = {}
 all_data_colnames = {}
@@ -32,16 +30,17 @@ def parse_text(data):
     data_type = data.__class__.__name__ 
     if(data_type == 'Text'):
         template = jinja_env.get_template('text.j2')
-        output_folder.write(template.render(text=data.text, datetime=now))
+        output_folder.write(template.render(text=data.text))
     elif(data_type == 'Header'):
+        print('header color ', data.header_color)
         template = jinja_env.get_template('header.j2')
-        output_folder.write(template.render(data=data, datetime=now))
+        output_folder.write(template.render(data=data))
     else:
         print('propao u else')
 
 def parse_image(data):
     template = jinja_env.get_template('image.j2')
-    output_folder.write(template.render(image_source=join(data.image_source), datetime=now))
+    output_folder.write(template.render(image_source=join(data.image_source)))
 
 def parse_table(data):
     # Za sada ovako, mozda enkapsulirati promenljive u klasu Tabela?
@@ -233,6 +232,11 @@ def suma(column, chart):
 
     return data_values
 
+def parse_line(data):
+    print('AAAA line ', data.color)
+    template = jinja_env.get_template('horizontal_line.j2')
+    output_folder.write(template.render(color=data.color))
+
 def generate_pdf():
     utils_folder = join(dirname(__file__), 'utils')
     config = pdfkit.configuration(wkhtmltopdf=join(utils_folder, 'wkhtmltopdf.exe'))
@@ -257,6 +261,8 @@ if __name__ == "__main__":
             parse_table(document_statement.table)
         elif(document_statement.chart != None):
             parse_chart(document_statement.chart)
+        elif(document_statement.line != None):
+            parse_line(document_statement.line)
         else:
             print("Exception")
 
