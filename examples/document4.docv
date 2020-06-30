@@ -1,0 +1,22 @@
+data studenti = "SELECT * FROM studenti"
+header H1 purple = "Ocene"
+line purple
+header H2 = "Jezici specificni za domen"
+text = "Zimski semestar 2019/2020"
+table 
+[
+    datasource studenti
+    num-row=4
+    title="Tabela 1"
+    select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
+]
+linechart
+[
+    title="Pie chart 2"
+    datasource studenti
+    series-select
+    [
+        label={{Ocena}}
+        value=Sum({{Bodovi}})
+    ]
+]

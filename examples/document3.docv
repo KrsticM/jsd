@@ -1,0 +1,11 @@
+data studenti = "SELECT * FROM studenti"
+header H1 blue = "Ocene"
+line blue
+text = "Zimski semestar 2019/2020"
+table 
+[
+    datasource studenti
+    num-row=4
+    title="Tabela 1"
+    select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
+]

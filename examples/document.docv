@@ -21,13 +21,3 @@ piechart
         value=Count({{Ocena}})
     ]
 ]
-linechart
-[
-    title="Pie chart 2"
-    datasource studenti
-    series-select
-    [
-        label={{Ocena}}
-        value=Sum({{Bodovi}})
-    ]
-]

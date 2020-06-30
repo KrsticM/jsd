@@ -7,7 +7,7 @@ import pdfkit
 from models.chart import Chart
 
 metamodel = metamodel_from_file('grammar.tx')
-model = metamodel.model_from_file('document.docv')
+model = metamodel.model_from_file('examples/document.docv')
 con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__file__), 'templates')), trim_blocks=True, lstrip_blocks=True)
