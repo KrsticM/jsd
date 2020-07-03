@@ -31,7 +31,7 @@ piechart
 ```
 
 ### Generated document example
-![generated example](examples/document.jpeg)
+![generated example](document.jpeg)
 
 ## Second example (document3.docv)
 DSL script which contains a header, horizontal line, normal text and table. 
@@ -51,7 +51,7 @@ table
 ]
 ```
 ### Generated document example
-![generated example](examples/document3.jpeg)
+![generated example](document3.jpeg)
 
 ## Third example (document4.docv)
 DSL script which contains a header, horizontal line, subheader, normal text, table and linechart. 
@@ -82,4 +82,4 @@ linechart
 ]
 ```
 ### Generated document example
-![generated example](examples/document4.jpeg)
+![generated example](document4.jpeg)
