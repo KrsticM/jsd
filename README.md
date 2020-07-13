@@ -43,7 +43,11 @@ table
 ```
 $ pip install -r requirements.txt
 ```
-2. ...
+2. Run interpreter
+```
+$ python interpreter.py <document_path>
+```
+3. Genereted files are in generated directory
 
 ## Technologies used
 - Python 3.6+
