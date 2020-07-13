@@ -3,11 +3,11 @@ from os.path import join, dirname
 import psycopg2
 import jinja2
 import pdfkit
+import sys
 
 from models.chart import Chart
 
-metamodel = metamodel_from_file('grammar.tx')
-model = metamodel.model_from_file('examples/document.docv')
+metamodel = metamodel_from_file('grammar/grammar.tx')
 con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__file__), 'templates')), trim_blocks=True, lstrip_blocks=True)
@@ -233,7 +233,6 @@ def suma(column, chart):
     return data_values
 
 def parse_line(data):
-    print('AAAA line ', data.color)
     template = jinja_env.get_template('horizontal_line.j2')
     output_folder.write(template.render(color=data.color))
 
@@ -245,6 +244,13 @@ def generate_pdf():
 
 # main fuction
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print('Error: Document file is missing.')
+    else:
+        document_file = sys.argv[1]
+
+    model = metamodel.model_from_file(document_file)
+
     output_folder = open('generated/output.html', 'w', encoding="utf-8")
 
     template = jinja_env.get_template('html_header.j2')
@@ -273,6 +279,3 @@ if __name__ == "__main__":
     output_folder.close()
 
     generate_pdf()
-
-    print(all_data)
-    print(all_data_colnames)

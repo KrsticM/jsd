@@ -1,0 +1,148 @@
+
+    digraph textX {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+61307712[ label="{Document|}"]
+
+60594536[ label="{DocumentStatement|}"]
+
+61324096[ label="{HorizontalLine|+color:Color\l}"]
+
+61538824[ label="{Color|black\|blue\|brown\|cyan\|green\|grey\|magenta\|orange\|pink\|purple\|red\|silver\|white\|yellow}"]
+
+61540240[ label="{Data|+name:ID\l+data_value:STRING\l}"]
+
+61309448[ label="{Image|+image_source:STRING\l}"]
+
+61540712[ label="{Table|}"]
+
+61550640[ label="{*TabbleAttr|}"]
+
+61552056[ label="{DataSource|+name:ID\l}"]
+
+61553472[ label="{NumRow|+num_row:INT\l}"]
+
+61563400[ label="{Select|}"]
+
+61564816[ label="{Title|+title:STRING\l}"]
+
+61566232[ label="{Column|}"]
+
+61567968[ label="{*TextType|}"]
+
+61569384[ label="{Text|+text:STRING\l}"]
+
+61583408[ label="{Header|+header_size:HeaderSize\l+header_color:Color\l+text:STRING\l}"]
+
+61584824[ label="{HeaderSize|H1\|H2\|H3}"]
+
+61586240[ label="{*ChartType|}"]
+
+61600264[ label="{PieChart|}"]
+
+61601680[ label="{LineChart|}"]
+
+61570328[ label="{BarChart|}"]
+
+61565760[ label="{*ChartAttr|}"]
+
+61553000[ label="{SeriesSelect|}"]
+
+61538352[ label="{*SeriesAttr|}"]
+
+61599792[ label="{Label|}"]
+
+61603096[ label="{*LabelValue|}"]
+
+61613024[ label="{Value|}"]
+
+61614440[ label="{*DataField|}"]
+
+61628464[ label="{AggregateField|+type:AggregateType\l}"]
+
+61629880[ label="{AggregateType|Count\|Sum}"]
+
+61631296[ label="{DataValue|+value:STRING\l}"]
+
+61653512[ label="{StringValues|}"]
+
+61654928[ label="{StringValue|+value:STRING\l}"]
+
+61656344[ label="{Comment|\\/\\*(.\|\\n)*\?\\*\\/\|\\/\\/.*\?$}"]
+
+60595008[ label="{ID|}"]
+
+61305352[ label="{STRING|}"]
+
+61306768[ label="{BOOL|}"]
+
+61308184[ label="{INT|}"]
+
+61309920[ label="{FLOAT|}"]
+
+61311336[ label="{STRICTFLOAT|}"]
+
+61317168[ label="{NUMBER|}"]
+
+61318584[ label="{BASETYPE|}"]
+
+61320000[ label="{*OBJECT|}"]
+
+
+
+61307712 -> 60594536[arrowtail=diamond, dir=both, headlabel="document_statement 0..*"]
+60594536 -> 61540240[arrowtail=diamond, dir=both, headlabel="data "]
+60594536 -> 61309448[arrowtail=diamond, dir=both, headlabel="image "]
+60594536 -> 61540712[arrowtail=diamond, dir=both, headlabel="table "]
+60594536 -> 61567968[arrowtail=diamond, dir=both, headlabel="text "]
+60594536 -> 61586240[arrowtail=diamond, dir=both, headlabel="chart "]
+60594536 -> 61324096[arrowtail=diamond, dir=both, headlabel="line "]
+61540712 -> 61550640[arrowtail=diamond, dir=both, headlabel="table_attr 1..*"]
+61550640 -> 61552056 [dir=back]
+61550640 -> 61553472 [dir=back]
+61550640 -> 61563400 [dir=back]
+61550640 -> 61564816 [dir=back]
+61563400 -> 61566232[arrowtail=diamond, dir=both, headlabel="columns 1..*"]
+61566232 -> 61631296[arrowtail=diamond, dir=both, headlabel="name "]
+61567968 -> 61569384 [dir=back]
+61567968 -> 61583408 [dir=back]
+61586240 -> 61600264 [dir=back]
+61586240 -> 61601680 [dir=back]
+61586240 -> 61570328 [dir=back]
+61600264 -> 61565760[arrowtail=diamond, dir=both, headlabel="chart_attr 1..*"]
+61601680 -> 61565760[arrowtail=diamond, dir=both, headlabel="chart_attr 1..*"]
+61570328 -> 61565760[arrowtail=diamond, dir=both, headlabel="chart_attr 1..*"]
+61565760 -> 61552056 [dir=back]
+61565760 -> 61553000 [dir=back]
+61565760 -> 61564816 [dir=back]
+61553000 -> 61538352[arrowtail=diamond, dir=both, headlabel="series_attr 1..*"]
+61538352 -> 61599792 [dir=back]
+61538352 -> 61613024 [dir=back]
+61599792 -> 61603096[arrowtail=diamond, dir=both, headlabel="label_value "]
+61603096 -> 61653512 [dir=back]
+61603096 -> 61631296 [dir=back]
+61613024 -> 61614440[arrowtail=diamond, dir=both, headlabel="datafield "]
+61614440 -> 61628464 [dir=back]
+61614440 -> 61631296 [dir=back]
+61614440 -> 61653512 [dir=back]
+61628464 -> 61631296[arrowtail=diamond, dir=both, headlabel="data_value "]
+61653512 -> 61654928[arrowtail=diamond, dir=both, headlabel="string_values 1..*"]
+61317168 -> 61311336 [dir=back]
+61317168 -> 61308184 [dir=back]
+61318584 -> 61317168 [dir=back]
+61318584 -> 61309920 [dir=back]
+61318584 -> 61306768 [dir=back]
+61318584 -> 60595008 [dir=back]
+61318584 -> 61305352 [dir=back]
+61320000 -> 61318584 [dir=back]
+
+}
