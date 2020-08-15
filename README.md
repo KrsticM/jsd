@@ -36,18 +36,18 @@ table
 ```
 ### Generated document example
 
-![generated example](examples/document3.jpeg)
+![generated example](dvDSL/examples/document3.jpeg)
 
 ## Instructions
 1. Install requirements
 ```
-$ pip install -r requirements.txt
+$ pip install .
 ```
-2. Run interpreter
+2. Generate your document
 ```
-$ python interpreter.py <document_path>
+$ textx generate --target html+pdf <document_path>
 ```
-3. Genereted files are in generated directory
+3. Genereted files are in the same directory as input file
 
 ## Technologies used
 - Python 3.6+
