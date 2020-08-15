@@ -1,3 +1,6 @@
+[textx_generators]
+docv_pdf_gen = dvDSL:docv_pdf_generator
+
 [textx_languages]
-documentV = grammar:visualiseDataLanguage
+documentV = dvDSL.grammar:visualiseDataLanguage
 

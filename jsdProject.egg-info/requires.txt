@@ -1,1 +1,2 @@
-textx_ls_core
+textx
+Jinja2

@@ -1,5 +1,12 @@
 README.md
 setup.py
+dvDSL/__init__.py
+dvDSL/interpreter.py
+dvDSL/grammar/__init__.py
+dvDSL/models/__init__.py
+dvDSL/models/chart.py
+dvDSL/templates/__init__.py
+dvDSL/utils/__init__.py
 jsdProject.egg-info/PKG-INFO
 jsdProject.egg-info/SOURCES.txt
 jsdProject.egg-info/dependency_links.txt
