@@ -16,6 +16,8 @@ table, th, td {
 </head>
 <body><h1 style="color:#17a2b8"> Ocene </h1>
 <hr style="background-color:#17a2b8">
+<img src="https://i.imgur.com/vHrSBSi.jpg" />
+<h2  style="color:pink"> Jezici specificni za domen </h2>
 <p> Zimski semestar 2019/2020 </p>
 <table border="1" style="width:100%">
     <tr>
@@ -32,27 +34,36 @@ table, th, td {
     </tr>  
     <tr>
         <td>ra-1-2015</td>
-        <td>Mikić</td>
+        <td>Mikic</td>
         <td>Mika</td>
         <td>55</td>
         <td>6</td>
     </tr>
     <tr>
+        <td>ra-2-2015</td>
+        <td>Peric</td>
+        <td>Pera</td>
+        <td>65</td>
+        <td>7</td>
+    </tr>
+    <tr>
         <td>ra-3-2015</td>
-        <td>Jovanović</td>
+        <td>Jovanovic</td>
         <td>Jovan</td>
         <td>75</td>
         <td>8</td>
     </tr>
     <tr>
-        <td>ra-2-2015</td>
-        <td>Perić</td>
-        <td>Pera</td>
-        <td>65</td>
+        <td>ra-4-2015</td>
+        <td>Neko</td>
+        <td>Neko</td>
+        <td>80</td>
         <td>8</td>
     </tr>
    
 </table>
+<br>
+<br><div class="reportGraph"><canvas id="chart0"></canvas></div>
 <br>
 <br>
 <script type="text/javascript">
@@ -74,6 +85,25 @@ Function.prototype.bind = Function.prototype.bind || function (thisp) {
 };
 
 function drawGraphs() {
+    new Chart(
+        document.getElementById("chart0"), {
+        "responsive": false,
+            "type":"pie",
+            "data":{"labels":[6, 7, 8],"datasets":[{"data":[1, 1, 2],"fill":false,
+                        backgroundColor: palette('tol', [1, 1, 2].length).map(function(hex) {
+                        return '#' + hex;}),  "lineTension":0.1}]},           
+            "options": {
+                title: {
+                    display: true,
+                    text: "Pie chart 1"
+                },
+                legend: {
+                    display: true,
+              
+                }
+            }
+        }
+    );
 }
 window.onload = function() {
     drawGraphs();

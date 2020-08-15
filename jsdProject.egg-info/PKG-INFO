@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: jsdProject
+Version: 0.1.0
+Summary: A domain-specific language for business data visualisation
+Home-page: https://github.com/KrsticM/jsd
+Author: Tim 7
+Author-email: jsd2020tim7@gmail.com
+License: MIT
+Description: UNKNOWN
+Keywords: textX DSL python domain specific languages document graphics
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8

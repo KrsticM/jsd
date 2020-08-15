@@ -22,9 +22,10 @@ setup(
     license=LICENSE,
     packages=find_packages(),
     include_package_data=True,
-    package_data={"": ["*.tx"]},
-    install_requires=["textx_ls_core"],
-    entry_points={"textx_languages": ["documentV=grammar:visualiseDataLanguage"]},
+    package_data={"": ["*.tx", "*.j2", "*.exe"]},
+    install_requires=["textx", "Jinja2"],
+    entry_points={"textx_languages": ["documentV=dvDSL.grammar:visualiseDataLanguage"],
+                  "textx_generators": ["docv_pdf_gen = dvDSL:docv_pdf_generator"]},
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",

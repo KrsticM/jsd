@@ -5,11 +5,11 @@ import jinja2
 import pdfkit
 import sys
 
-from models.chart import Chart
+from .models.chart import Chart
 
-metamodel = metamodel_from_file('grammar/grammar.tx')
 con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 
+print(join(dirname(__file__), 'templates'))
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__file__), 'templates')), trim_blocks=True, lstrip_blocks=True)
 
 all_data = {}
@@ -26,7 +26,7 @@ def parse_data(data):
     all_data[data.name] = rows
     all_data_colnames[data.name] = colnames
     
-def parse_text(data):    
+def parse_text(data, output_folder):    
     data_type = data.__class__.__name__ 
     if(data_type == 'Text'):
         template = jinja_env.get_template('text.j2')
@@ -38,11 +38,11 @@ def parse_text(data):
     else:
         print('propao u else')
 
-def parse_image(data):
+def parse_image(data, output_folder):
     template = jinja_env.get_template('image.j2')
     output_folder.write(template.render(image_source=join(data.image_source)))
 
-def parse_table(data):
+def parse_table(data, output_folder):
     # Za sada ovako, mozda enkapsulirati promenljive u klasu Tabela?
     numRow = None
     title = None
@@ -85,7 +85,7 @@ def parse_table(data):
     output_folder.write(template.render(col_names_num=len(col_names), numRow=numRow, title=title, col_names=col_names, arranged_table=arranged_table))
 
 
-def parse_chart(data):
+def parse_chart(data, output_folder):
     chart_type = data.__class__.__name__
     print(chart_type)
     if(chart_type == 'PieChart'):
@@ -232,26 +232,18 @@ def suma(column, chart):
 
     return data_values
 
-def parse_line(data):
+def parse_line(data, output_folder):
     template = jinja_env.get_template('horizontal_line.j2')
     output_folder.write(template.render(color=data.color))
 
-def generate_pdf():
+def generate_pdf(outuput_dir):
     utils_folder = join(dirname(__file__), 'utils')
     config = pdfkit.configuration(wkhtmltopdf=join(utils_folder, 'wkhtmltopdf.exe'))
     options = { 'javascript-delay':'1000' }
-    pdfkit.from_file('generated/output.html', 'generated/output.pdf', options=options, configuration=config)
+    pdfkit.from_file(outuput_dir + "output.html", outuput_dir + "output.pdf", options=options, configuration=config)
 
-# main fuction
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print('Error: Document file is missing.')
-    else:
-        document_file = sys.argv[1]
-
-    model = metamodel.model_from_file(document_file)
-
-    output_folder = open('generated/output.html', 'w', encoding="utf-8")
+def generate(model, outuput_dir):
+    output_folder = open(outuput_dir + "output.html", 'w', encoding="utf-8")
 
     template = jinja_env.get_template('html_header.j2')
     output_folder.write(template.render())
@@ -260,15 +252,15 @@ if __name__ == "__main__":
         if(document_statement.data != None):
             parse_data(document_statement.data)
         elif(document_statement.text != None):
-            parse_text(document_statement.text)
+            parse_text(document_statement.text, output_folder)
         elif(document_statement.image != None):
-            parse_image(document_statement.image)
+            parse_image(document_statement.image, output_folder)
         elif(document_statement.table != None):
-            parse_table(document_statement.table)
+            parse_table(document_statement.table, output_folder)
         elif(document_statement.chart != None):
-            parse_chart(document_statement.chart)
+            parse_chart(document_statement.chart, output_folder)
         elif(document_statement.line != None):
-            parse_line(document_statement.line)
+            parse_line(document_statement.line, output_folder)
         else:
             print("Exception")
 
@@ -278,4 +270,16 @@ if __name__ == "__main__":
     con.close()
     output_folder.close()
 
-    generate_pdf()
+    generate_pdf(outuput_dir)
+
+# main fuction
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print('Error: Document file is missing.')
+    else:
+        document_file = sys.argv[1]
+
+    metamodel = metamodel_from_file('grammar/grammar.tx')
+    model = metamodel.model_from_file(document_file)
+    generate(model, "generated/")
+   

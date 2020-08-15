@@ -1,0 +1,8 @@
+README.md
+setup.py
+jsdProject.egg-info/PKG-INFO
+jsdProject.egg-info/SOURCES.txt
+jsdProject.egg-info/dependency_links.txt
+jsdProject.egg-info/entry_points.txt
+jsdProject.egg-info/requires.txt
+jsdProject.egg-info/top_level.txt
