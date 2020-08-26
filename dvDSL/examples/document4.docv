@@ -8,7 +8,7 @@ table
     datasource studenti
     num-row=4
     title="Tabela 1"
-    select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
+    select = ({{indeks}}, {{prezime}}, {{ime}}, {{bodovi}}, {{ocena}},)
 ]
 linechart
 [
@@ -16,7 +16,7 @@ linechart
     datasource studenti
     series-select
     [
-        label={{Ocena}}
-        value=Sum({{Bodovi}})
+        label={{ocena}}
+        value=Sum({{bodovi}})
     ]
 ]

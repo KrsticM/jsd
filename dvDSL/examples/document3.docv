@@ -7,5 +7,5 @@ table
     datasource studenti
     num-row=4
     title="Tabela 1"
-    select = ({{Indeks}}, {{Prezime}}, {{Ime}}, {{Bodovi}}, {{Ocena}},)
+    select = ({{indeks}}, {{prezime}}, {{ime}}, {{bodovi}}, {{ocena}},)
 ]

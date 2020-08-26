@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={"": ["*.tx", "*.j2", "*.exe"]},
-    install_requires=["textx", "Jinja2"],
+    install_requires=["textx", "Jinja2", "psycopg2"],
     entry_points={"textx_languages": ["documentV=dvDSL.grammar:visualiseDataLanguage"],
                   "textx_generators": ["docv_pdf_gen = dvDSL:docv_pdf_generator"]},
     classifiers=[

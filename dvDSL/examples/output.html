@@ -14,10 +14,9 @@ table, th, td {
 
 </style>
 </head>
-<body><h1 style="color:#17a2b8"> Ocene </h1>
-<hr style="background-color:#17a2b8">
-<img src="https://i.imgur.com/vHrSBSi.jpg" />
-<h2  style="color:pink"> Jezici specificni za domen </h2>
+<body><h1 style="color:purple"> Ocene </h1>
+<hr style="background-color:purple">
+<h2  style="color:None"> Jezici specificni za domen </h2>
 <p> Zimski semestar 2019/2020 </p>
 <table border="1" style="width:100%">
     <tr>
@@ -25,11 +24,11 @@ table, th, td {
     </tr>
 
     <tr>
-        <th> Indeks </th>
-        <th> Prezime </th>
-        <th> Ime </th>
-        <th> Bodovi </th>
-        <th> Ocena </th>
+        <th> indeks </th>
+        <th> prezime </th>
+        <th> ime </th>
+        <th> bodovi </th>
+        <th> ocena </th>
   
     </tr>  
     <tr>
@@ -88,17 +87,18 @@ function drawGraphs() {
     new Chart(
         document.getElementById("chart0"), {
         "responsive": false,
-            "type":"pie",
-            "data":{"labels":[6, 7, 8],"datasets":[{"data":[1, 1, 2],"fill":false,
-                        backgroundColor: palette('tol', [1, 1, 2].length).map(function(hex) {
+            "type":"line",
+            "data":{"labels":[6, 7, 8],"datasets":[{"data":[55, 65, 155],"fill":false,
+                        "borderColor":"rgb(23,162,184)", 
+                        backgroundColor: palette('tol', [55, 65, 155].length).map(function(hex) {
                         return '#' + hex;}),  "lineTension":0.1}]},           
             "options": {
                 title: {
                     display: true,
-                    text: "Pie chart 1"
+                    text: "Pie chart 2"
                 },
                 legend: {
-                    display: true,
+                    display: false,
               
                 }
             }

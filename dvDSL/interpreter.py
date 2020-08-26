@@ -1,13 +1,16 @@
-from textx import metamodel_from_file
-from os.path import join, dirname
 import psycopg2
 import jinja2
 import pdfkit
 import sys
-
+from .config import config 
+from textx import metamodel_from_file
+from os.path import join, dirname
 from .models.chart import Chart
 
-con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
+params = config()
+con = psycopg2.connect(**params)
+
+#con = psycopg2.connect(database="jsd", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 
 print(join(dirname(__file__), 'templates'))
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__file__), 'templates')), trim_blocks=True, lstrip_blocks=True)
@@ -15,7 +18,6 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(join(dirname(__fil
 all_data = {}
 all_data_colnames = {}
 charts = []
-
 
 def parse_data(data):
     cur = con.cursor()
@@ -32,7 +34,6 @@ def parse_text(data, output_folder):
         template = jinja_env.get_template('text.j2')
         output_folder.write(template.render(text=data.text))
     elif(data_type == 'Header'):
-        print('header color ', data.header_color)
         template = jinja_env.get_template('header.j2')
         output_folder.write(template.render(data=data))
     else:
@@ -52,7 +53,6 @@ def parse_table(data, output_folder):
         attr_type = attr.__class__.__name__ 
         if(attr_type == 'DataSource'):
             datasource = attr.name
-
             if datasource not in all_data or datasource not in all_data_colnames:
                 print("[Exception]: datasource " + datasource + " doesn't exists")
                 return 
@@ -240,10 +240,10 @@ def generate_pdf(outuput_dir):
     utils_folder = join(dirname(__file__), 'utils')
     config = pdfkit.configuration(wkhtmltopdf=join(utils_folder, 'wkhtmltopdf.exe'))
     options = { 'javascript-delay':'1000' }
-    pdfkit.from_file(outuput_dir + "output.html", outuput_dir + "output.pdf", options=options, configuration=config)
+    pdfkit.from_file(outuput_dir + "/output.html", outuput_dir + "/output.pdf", options=options, configuration=config)
 
 def generate(model, outuput_dir):
-    output_folder = open(outuput_dir + "output.html", 'w', encoding="utf-8")
+    output_folder = open(outuput_dir + "/output.html", 'w', encoding="utf-8")
 
     template = jinja_env.get_template('html_header.j2')
     output_folder.write(template.render())
@@ -274,6 +274,7 @@ def generate(model, outuput_dir):
 
 # main fuction
 if __name__ == "__main__":
+
     if len(sys.argv) < 2:
         print('Error: Document file is missing.')
     else:
@@ -281,5 +282,5 @@ if __name__ == "__main__":
 
     metamodel = metamodel_from_file('grammar/grammar.tx')
     model = metamodel.model_from_file(document_file)
-    generate(model, "generated/")
+    #generate(model, "generated/")
    
