@@ -36,7 +36,7 @@ table
 ```
 ### Generated document example
 
-![generated example](dvDSL/examples/document3.jpeg)
+![generated example](examples/document3.jpeg)
 
 ## Instructions
 1. Install requirements
