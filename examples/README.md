@@ -1,3 +1,26 @@
+# Instructions
+1. Create database.ini file in your home folder with PostgreSQL credencials.
+```
+[postgresql]
+host=127.0.0.1
+database=jsd
+user=*user*
+password=*password*
+```
+2. Run students.py script to add data to database
+```
+$ python students.py
+```
+3. Install requirements
+```
+$ pip install .
+```
+4. Generate your document
+```
+$ textx generate --target html+pdf <document_path>
+```
+5. Genereted files are in the same directory as input file
+
 # Examples
 
 ## First example (document.docv)
