@@ -1,7 +1,7 @@
 Arpeggio==1.9.2
 Click==7.0
 graphviz==0.14
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 pdfkit==0.6.1
 psycopg2==2.8.5
